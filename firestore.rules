@@ -2,10 +2,10 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /draaiboeken/{boek} {
-      allow get, create: if boek == "eb67d8a4fc08e4b6bade9648e482cbc4d29f8224";
+      allow get, create: if boek in ["eb67d8a4fc08e4b6bade9648e482cbc4d29f8224", "19933dd67ca23e2cbeabe41c559a585cc9f7cd66"];
       match /acties/{actie} {
-        allow read, delete: if boek == "eb67d8a4fc08e4b6bade9648e482cbc4d29f8224";
-        allow create, update: if boek == "eb67d8a4fc08e4b6bade9648e482cbc4d29f8224"
+        allow read, delete: if boek in ["eb67d8a4fc08e4b6bade9648e482cbc4d29f8224", "19933dd67ca23e2cbeabe41c559a585cc9f7cd66"];
+        allow create, update: if boek in ["eb67d8a4fc08e4b6bade9648e482cbc4d29f8224", "19933dd67ca23e2cbeabe41c559a585cc9f7cd66"]
           && request.resource.data.keys().hasOnly(['titel','eigenaar','deadline','status','notitie','volgorde','door','gewijzigd'])
           && request.resource.data.titel is string && request.resource.data.titel.size() <= 300
           && request.resource.data.status in ['open','bezig','klaar'];

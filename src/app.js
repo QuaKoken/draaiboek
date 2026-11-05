@@ -6,8 +6,12 @@ import {
 } from "firebase/firestore";
 import { FIREBASE_CONFIG } from "./config.build.js";
 
-const CODE_KEY = "draaiboek.code";
-const NAME_KEY = "draaiboek.naam";
+// Per draaiboek eigen opslag, zodat meerdere draaiboeken op hetzelfde adres elkaars code niet overschrijven.
+// Zonder __BOEK__ (de oorspronkelijke app van Job & Loes) blijven de sleutels ongewijzigd.
+const PREFIX = typeof __BOEK__ !== "undefined" ? "draaiboek." + __BOEK__ + "." : "draaiboek.";
+const CODE_KEY = PREFIX + "code";
+const NAME_KEY = PREFIX + "naam";
+const HINT_KEY = PREFIX + "hint";
 const DB_SALT = "quakoken-draaiboek-db-v1";
 
 // ---------- crypto ----------
@@ -78,10 +82,10 @@ function initInstallHint() {
   const hint = document.getElementById("installhint");
   if (!hint) return;
   if (standalone) { hint.remove(); return; }
-  let dismissed = false; try { dismissed = localStorage.getItem("draaiboek.hint") === "weg"; } catch (e) {}
+  let dismissed = false; try { dismissed = localStorage.getItem(HINT_KEY) === "weg"; } catch (e) {}
   if (dismissed) { hint.remove(); return; }
   hint.hidden = false;
-  hint.querySelector("button").addEventListener("click", () => { try { localStorage.setItem("draaiboek.hint", "weg"); } catch (e) {} hint.remove(); });
+  hint.querySelector("button").addEventListener("click", () => { try { localStorage.setItem(HINT_KEY, "weg"); } catch (e) {} hint.remove(); });
 }
 
 // ---------- actielijst ----------
