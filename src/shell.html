@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Draaiboek · QuaKoken</title>
+<meta name="theme-color" content="#4F4A22">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Draaiboek">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Jost:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap">
+<style>
+[hidden]{display:none!important}
+img{max-width:100%}
+/*PAGE_CSS*/
+body{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.hero{margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+.awho{font-size:12px;color:var(--muted);margin-top:4px;font-style:italic}
+.sync{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin:-4px 0 12px}
+.sync .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.sync[data-state="ok"] .dot{background:var(--ok)}
+.sync[data-state="pending"] .dot{background:var(--warn)}
+.sync[data-state="offline"] .dot,.sync[data-state="err"] .dot{background:var(--warn)}
+.sync[data-state="err"]{color:var(--warn)}
+.installhint{background:var(--olive-soft);border-bottom:1px solid var(--line);font-size:14px}
+.installhint .wrap{display:flex;gap:12px;align-items:center;padding-block:10px}
+.installhint p{margin:0;flex:1}
+.installhint button{font:inherit;font-size:13px;background:none;border:1px solid var(--line);border-radius:8px;padding:4px 10px;color:var(--ink);cursor:pointer}
+.lock{min-height:100vh;min-height:100dvh;display:grid;place-items:center;background:var(--olive-deep);color:var(--band-ink);padding:24px 16px;margin-top:calc(-1 * env(safe-area-inset-top,0px))}
+.lock .box{width:100%;max-width:360px;display:grid;gap:16px;text-align:center}
+.lock .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.8}
+.lock h1{font-family:var(--f-script);font-weight:400;font-size:64px;line-height:1;margin:0}
+.lock form{display:grid;gap:10px;text-align:left}
+.lock label{font-size:13px;opacity:.85}
+.lock input{font:inherit;font-size:17px;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:var(--band-ink);width:100%}
+.lock input::placeholder{color:rgba(251,250,245,.5)}
+.lock button{font:inherit;font-size:16px;font-weight:500;padding:12px;border-radius:10px;border:0;background:var(--band-ink);color:var(--olive-deep);cursor:pointer;margin-top:6px}
+.lock .err{color:#F6D58E;font-size:14px}
+.lock .small{font-size:13px;opacity:.7}
+</style>
+</head>
+<body>
+<div class="lock" id="lock" hidden>
+  <div class="box">
+    <div class="eyebrow">QuaKoken</div>
+    <h1>Draaiboek</h1>
+    <form id="lockform" novalidate>
+      <label for="code">Toegangscode</label>
+      <input id="code" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Code van Joris">
+      <label for="naam">Je naam <span class="small">(zodat anderen zien wie wat aanpaste)</span></label>
+      <input id="naam" type="text" autocomplete="given-name" placeholder="Je voornaam">
+      <div class="err" id="lockerr" hidden></div>
+      <button type="submit">Openen</button>
+    </form>
+    <div class="small">Je hoeft de code maar één keer in te vullen.</div>
+  </div>
+</div>
+<div id="app" hidden></div>
+<script type="module" src="app.bundle.js?v=__V__"></script>
+</body>
+</html>

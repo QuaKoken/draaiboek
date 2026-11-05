@@ -1,0 +1,7 @@
+node_modules/
+public/
+src/config.build.js
+src/content.html
+src/seed.json
+firebase-config.json
+src/meta.json
